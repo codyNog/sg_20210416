@@ -18,9 +18,12 @@
     "export": "next export",
     "generate": "yarn build && yarn export",
     "server": "yarn start && yarn start",
-    "lint": "eslint --max-warnings=0 '**/*.tsx' '**/*.ts'"
+    "lint": "eslint --max-warnings=0 '**/*.tsx' '**/*.ts'",
+    "test": "jest"
   },
   "devDependencies": {
+    "@testing-library/react-hooks": "^3.4.1",
+    "@types/jest": "^26.0.9",
     "@types/node": "^13.7.0",
     "@types/react": "^16.9.19",
     "@typescript-eslint/eslint-plugin": "^2.19.0",
@@ -29,7 +32,10 @@
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.18.3",
+    "jest": "^26.3.0",
     "prettier": "^1.19.1",
+    "react-test-renderer": "^16.13.1",
+    "ts-jest": "^26.2.0",
     "typescript": "^3.7.5"
   }
 }
