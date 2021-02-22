@@ -1,0 +1,50 @@
+{
+  "Component template": {
+    "prefix": "component",
+    "body": [
+      "interface Props {",
+      "  // id: string",
+      "}",
+      "",
+      "export const ${TM_DIRECTORY/^.+\\/(.*)$/$1/}: React.FC<Props> = ({ children }) => {",
+      "  return ${3:(null$1)}",
+      "}",
+      ""
+    ]
+  },
+  "NextPage template": {
+    "prefix": "nextpage",
+    "body": [
+      "const Component = () => {",
+      "  return ${3:(null$1)}",
+      "}",
+      "",
+      "export default Component"
+    ]
+  },
+  "CustomHooks template": {
+    "prefix": "hooks",
+    "body": [
+      "import { useState, useCallback } from 'react';",
+      "",
+      "export const use${TM_DIRECTORY/^.+\\/(.*)$/$1/} = () => {",
+      "  const [state$1, setState$1] = useState('');",
+      "",
+      "  return { state$1, setState$1 };",
+      "};"
+    ]
+  },
+  "Storybook template": {
+    "prefix": "storybook",
+    "body": [
+      "import React from 'react'",
+      "import { storiesOf } from '@storybook/react'",
+      "",
+      "import ${TM_DIRECTORY/^.+\\/(.*)$/$1/} from './'",
+      "",
+      "storiesOf('${TM_DIRECTORY/^.+\\/(.*)\\/(.*)$/$1/}', module)",
+      "  .add('${1:${TM_DIRECTORY/^.+\\/(.*)$/$1/}}', () => <${1:${TM_DIRECTORY/^.+\\/(.*)$/$1/}} />)"
+    ],
+    "description": "Storybook template"
+  }
+}
