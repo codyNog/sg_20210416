@@ -8,7 +8,7 @@ RUN yarn install --frozen-lockfile
 # This is where because may be the case that you would try
 # to build the app based on some `X_TAG` in my case (Git commit hash)
 # but the code hasn't changed.
-FROM node:lts-alpine AS builder
+FROM node:14-alpine AS builder
 
 ENV NODE_ENV=production
 WORKDIR /opt/app
