@@ -9,6 +9,11 @@ module.exports = {
     "^.+\\.tsx?$": "ts-jest"
   },
 
+  // Runs special logic, such as cleaning up components
+  // when using React Testing Library and adds special
+  // extended assertions to Jest
+  setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
+
   // Test spec file resolution pattern
   // Matches parent folder `__tests__` and filename
   // should contain `test` or `spec`.
@@ -21,11 +26,12 @@ module.exports = {
     "~(.*)$": "<rootDir>/src/$1",
     "\\.(css|less)$": "identity-obj-proxy"
   },
+  testPathIgnorePatterns: ["/__tests__/mocks"],
 
   modulePaths: ["<rootDir>"],
   globals: {
     "ts-jest": {
-      tsConfig: "tsconfig.jest.json"
+      tsconfig: "tsconfig.jest.json"
     }
   }
 };
