@@ -1,9 +1,7 @@
 version: "3"
 services:
   next:
-    build:
-      context: .
-      dockerfile: .Dockerfile
+    build .
     volumes:
       - ./app:/usr/src/app
     ports:
