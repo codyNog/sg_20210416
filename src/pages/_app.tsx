@@ -3,11 +3,11 @@ import Head from "next/head";
 import "ress";
 
 export default class MyApp extends App {
-  static async getInitialProps({ Component, ctx }) {
+  static async getStaticProps({ Component, ctx }) {
     let pageProps = {};
 
     if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
+      pageProps = await Component.getStaticProps(ctx);
     }
 
     return { pageProps };
