@@ -7,7 +7,7 @@ interface Address {
   otherAddress: string;
 }
 
-interface Request {
+export interface AgencyRequest {
   user: User;
   properties: Property[];
   memo?: string;
@@ -18,5 +18,5 @@ export interface Agency {
   name: string;
   address: Address;
   properties: Property[];
-  requests: Request[];
+  requests: AgencyRequest[];
 }
