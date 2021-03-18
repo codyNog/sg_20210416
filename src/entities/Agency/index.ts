@@ -8,6 +8,7 @@ interface Address {
 }
 
 export interface AgencyRequest {
+  id: string;
   user: User;
   properties: Property[];
   memo?: string;
