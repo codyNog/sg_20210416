@@ -7,4 +7,9 @@ export type Methods = {
     };
     resBody: User[];
   };
+  post: {
+    reqBody: User;
+
+    resBody: User;
+  };
 };
