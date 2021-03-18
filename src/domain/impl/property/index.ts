@@ -1,4 +1,4 @@
-import { Property } from "~/entities/Property";
+import { Property } from "~/domain/entities/Property";
 import { httpClient } from "~/libs/httpClient";
 
 const fetchProperties = () => {

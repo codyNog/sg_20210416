@@ -1,4 +1,4 @@
-import { Agency, AgencyRequest } from "~/entities/Agency";
+import { Agency, AgencyRequest } from "~/domain/entities/Agency";
 import { httpClient } from "~/libs/httpClient";
 
 const fetchAgencies = () => httpClient.agencies.$get();

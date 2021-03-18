@@ -1,4 +1,4 @@
-import { Agency } from "~/entities/Agency";
+import { Agency } from "~/domain/entities/Agency";
 
 export type Methods = {
   get: {

@@ -1,4 +1,4 @@
-import { Property } from "~/entities/Property";
+import { Property } from "~/domain/entities/Property";
 
 export type Methods = {
   get: {

@@ -1,4 +1,4 @@
-import { User } from "~/entities/User";
+import { User } from "~/domain/entities/User";
 import { httpClient } from "~/libs/httpClient";
 
 const fetchUsers = () => httpClient.users.$get();

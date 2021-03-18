@@ -1,6 +1,6 @@
-import { AgencyUseCase, agencyImpl } from "~/impl/agency";
-import { propertyImpl, PropertyUseCase } from "~/impl/property";
-import { UserUseCase, userImpl } from "~/impl/user";
+import { AgencyUseCase, agencyImpl } from "~/domain/impl/agency";
+import { propertyImpl, PropertyUseCase } from "~/domain/impl/property";
+import { UserUseCase, userImpl } from "~/domain/impl/user";
 
 interface Backend {
   userImpl: UserUseCase;

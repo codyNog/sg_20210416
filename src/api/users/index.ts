@@ -1,4 +1,4 @@
-import { User } from "~/entities/User";
+import { User } from "~/domain/entities/User";
 
 export type Methods = {
   get: {

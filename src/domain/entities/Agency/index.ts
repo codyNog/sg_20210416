@@ -1,5 +1,5 @@
-import { Property } from "~/entities/Property";
-import { User } from "~/entities/User";
+import { Property } from "~/domain/entities/Property";
+import { User } from "~/domain/entities/User";
 
 interface Address {
   prefecture: string;

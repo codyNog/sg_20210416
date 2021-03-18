@@ -1,4 +1,4 @@
-import { AgencyRequest } from "~/entities/Agency";
+import { AgencyRequest } from "~/domain/entities/Agency";
 
 export type Methods = {
   put: {
