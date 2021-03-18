@@ -1,7 +1,5 @@
-import { Root } from "~/components/templates/root";
-
 const Component = () => {
-  return <Root />;
+  return null;
 };
 
 export default Component;
