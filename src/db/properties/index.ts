@@ -1,10 +1,7 @@
 import { Property } from "~/domain/entities/Property";
 import { db } from "~/libs/db";
 
-export interface DBPropertyModel extends Property {
-  owedBy: string; // 所有者のuserId
-  managedBy: string; // 管理業者のagencyId
-}
+export type DBPropertyModel = Property;
 
 const createProperty = async (property: DBPropertyModel) =>
   await db.properties.put(property);

@@ -1,18 +1,21 @@
+import { dbConverter } from "~/db/converter";
+import { propertyDB } from "~/db/properties";
 import { Property } from "~/domain/entities/Property";
 import { httpClient } from "~/libs/httpClient";
 
-const fetchProperties = () => {
-  return httpClient.properties.$get();
+const fetchProperties = async () => {
+  const propertyModels = await propertyDB.getProperties();
+  return propertyModels.map((elem) => dbConverter.modelToProperty(elem));
 };
 
-const fetchProperty = (id: string) => {
-  return httpClient.properties._propertyId(id).$get();
+const fetchProperty = async (id: string) => {
+  const propertyModel = await propertyDB.getProperty(id);
+  return dbConverter.modelToProperty(propertyModel);
 };
 
-const updateProperty = (property: Property) => {
-  return httpClient.properties
-    ._propertyId(property.id)
-    .$put({ body: property });
+const updateProperty = async (property: Property) => {
+  await propertyDB.updateProperty(dbConverter.propertyToModel(property));
+  return property;
 };
 
 const deleteProperty = (id: string) => {

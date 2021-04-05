@@ -2,7 +2,6 @@ interface Status {
   value: number;
   rent?: number;
   for: "sale" | "rent" | "other";
-  isVacant: boolean;
 }
 
 interface Address {
@@ -25,4 +24,6 @@ export interface Property {
   status: Status;
   address: Address;
   detail: Detail;
+  owedBy: { id: string; name: string };
+  managedBy: { id: string; name: string };
 }

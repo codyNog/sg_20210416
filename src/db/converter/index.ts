@@ -13,13 +13,17 @@ const modelToUser = (user: DBUserModel, properties: Property[]): User => {
   return { ...rest, properties };
 };
 
+const propertyToModel = (property: Property): DBPropertyModel => {
+  return property;
+};
+
 const modelToProperty = (property: DBPropertyModel): Property => {
-  const { owedBy: _foo, managedBy: _bar, ...rest } = property;
-  return rest;
+  return property;
 };
 
 export const dbConverter = {
   userToModel,
   modelToUser,
+  propertyToModel,
   modelToProperty
 };
