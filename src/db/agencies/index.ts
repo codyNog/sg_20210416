@@ -1,7 +1,7 @@
 import { Agency } from "~/domain/entities/Agency";
 import { db } from "~/libs/db";
 
-export type DBAgencyModel = Omit<Agency, "requests">;
+export type DBAgencyModel = Omit<Agency, "requests" | "properties">;
 
 const createAgency = async (agency: DBAgencyModel) =>
   await db.agencies.put(agency);

@@ -1,5 +1,7 @@
 import Dexie from "dexie";
+import { DBAgencyModel } from "~/db/agencies";
 import { DBPropertyModel } from "~/db/properties";
+import { DBRequestModel } from "~/db/requests";
 import { DBUserModel } from "~/db/users";
 
 type DexieDatabase = { [P in keyof Dexie]: Dexie[P] };
@@ -7,8 +9,8 @@ type DexieDatabase = { [P in keyof Dexie]: Dexie[P] };
 interface DB extends DexieDatabase {
   users: Dexie.Table<DBUserModel, number>;
   properties: Dexie.Table<DBPropertyModel, number>;
-  agencies: Dexie.Table<any, number>;
-  requests: Dexie.Table<any, number>;
+  agencies: Dexie.Table<DBAgencyModel, number>;
+  requests: Dexie.Table<DBRequestModel, number>;
 }
 
 const db = new Dexie("2021.04.09") as DB;

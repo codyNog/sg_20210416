@@ -11,6 +11,9 @@ const getProperty = async (id: string) => await db.properties.get(Number(id));
 const getPropertyByUserId = async (userId: string) =>
   await db.properties.where({ userId }).toArray();
 
+const getPropertyByAgencyId = async (agencyId: string) =>
+  await db.properties.where({ agencyId }).toArray();
+
 const updateProperty = async (property: DBPropertyModel) =>
   await db.properties.put(property);
 
@@ -23,6 +26,7 @@ interface PropertyDBUseCase {
   createProperty: (property: DBPropertyModel) => Promise<number>;
   getProperty: (id: string) => Promise<DBPropertyModel>;
   getPropertyByUserId: (userId: string) => Promise<DBPropertyModel[]>;
+  getPropertyByAgencyId: (agencyId: string) => Promise<DBPropertyModel[]>;
   updateProperty: (property: DBPropertyModel) => Promise<number>;
   deleteProperty: (id: string) => Promise<void>;
   getProperties: () => Promise<DBPropertyModel[]>;
@@ -32,6 +36,7 @@ export const propertyDB: PropertyDBUseCase = {
   createProperty,
   getProperty,
   getPropertyByUserId,
+  getPropertyByAgencyId,
   updateProperty,
   deleteProperty,
   getProperties

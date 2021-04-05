@@ -1,12 +1,7 @@
 import { Request } from "~/domain/entities/Request";
 import { db } from "~/libs/db";
 
-type Model = Omit<Request, "request | agency">;
-
-export interface DBRequestModel extends Model {
-  requestId: string;
-  agencyId: string;
-}
+export type DBRequestModel = Request;
 
 const createRequest = async (request: DBRequestModel) =>
   await db.requests.put(request);
@@ -21,12 +16,27 @@ const deleteRequest = async (id: string) =>
 
 const getRequests = async () => await db.requests.toArray();
 
+const getRequestsByAgencyId = async (agencyId: string) =>
+  await db.requests.where({ agency: { id: agencyId } }).toArray();
+
+const updateRequestsWhenAgencyDeleted = async (agencyId: string) => {
+  const requests = await getRequestsByAgencyId(agencyId);
+  await db.requests.bulkPut(
+    requests.map((elem) => {
+      const { agency: _omit, ...rest } = elem;
+      return rest;
+    })
+  );
+};
+
 interface RequestDBUseCase {
   createRequest: (request: DBRequestModel) => Promise<number>;
   getRequest: (id: string) => Promise<DBRequestModel>;
   updateRequest: (request: DBRequestModel) => Promise<number>;
   deleteRequest: (id: string) => Promise<void>;
   getRequests: () => Promise<DBRequestModel[]>;
+  getRequestsByAgencyId: (agencyId: string) => Promise<Request[]>;
+  updateRequestsWhenAgencyDeleted: (agencyId: string) => Promise<void>;
 }
 
 export const requestDB: RequestDBUseCase = {
@@ -34,5 +44,7 @@ export const requestDB: RequestDBUseCase = {
   getRequest,
   updateRequest,
   deleteRequest,
-  getRequests
+  getRequests,
+  getRequestsByAgencyId,
+  updateRequestsWhenAgencyDeleted
 };

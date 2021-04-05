@@ -1,11 +1,9 @@
 import { Property } from "~/domain/entities/Property";
-import { Agency } from "~/domain/entities/Agency";
-import { User } from "~/domain/entities/User";
 
 export interface Request {
   id: string;
-  user: User;
-  agency: Agency;
+  user?: { id: string; name: string };
+  agency?: { id: string; name: string };
   properties: Property;
   memo?: string;
 }
