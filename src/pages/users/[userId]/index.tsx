@@ -1,6 +1,6 @@
 import { useRouter } from "next/dist/client/router";
 import useSWR from "swr";
-import { UserItem } from "~/components/organisms/UserItem";
+import { UserItem } from "~/components/molecules/UserItem";
 import { backend } from "~/domain/backend";
 
 const Component = () => {

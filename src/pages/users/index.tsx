@@ -1,10 +1,10 @@
-import { UserForm } from "~/components/organisms/UserForm";
+import { UserList } from "~/components/organisms/UserList";
 import { Template } from "~/components/templates";
 
 const Component = () => {
   return (
     <Template>
-      <UserForm />
+      <UserList />
     </Template>
   );
 };

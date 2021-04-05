@@ -9,12 +9,13 @@ import { Methods as Methods5 } from './users'
 import { Methods as Methods6 } from './users/_userId@string'
 
 const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
-  const prefix = (baseURL === undefined ? 'undefined' : baseURL).replace(/\/$/, '')
+  const prefix = (baseURL === undefined ? '' : baseURL).replace(/\/$/, '')
   const PATH0 = '/agencies'
   const PATH1 = '/requests'
   const PATH2 = '/properties'
   const PATH3 = '/users'
   const GET = 'GET'
+  const POST = 'POST'
   const PUT = 'PUT'
   const DELETE = 'DELETE'
 
@@ -106,6 +107,10 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
         fetch<Methods5['get']['resBody']>(prefix, PATH3, GET, option).json(),
       $get: (option?: { query?: Methods5['get']['query'], config?: T }) =>
         fetch<Methods5['get']['resBody']>(prefix, PATH3, GET, option).json().then(r => r.body),
+      post: (option: { body: Methods5['post']['reqBody'], config?: T }) =>
+        fetch<Methods5['post']['resBody']>(prefix, PATH3, POST, option).json(),
+      $post: (option: { body: Methods5['post']['reqBody'], config?: T }) =>
+        fetch<Methods5['post']['resBody']>(prefix, PATH3, POST, option).json().then(r => r.body),
       $path: (option?: { method?: 'get'; query: Methods5['get']['query'] }) =>
         `${prefix}${PATH3}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`
     }
