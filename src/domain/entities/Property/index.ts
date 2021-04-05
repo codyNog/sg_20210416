@@ -24,6 +24,6 @@ export interface Property {
   status: Status;
   address: Address;
   detail: Detail;
-  owedBy: { id: string; name: string };
-  managedBy: { id: string; name: string };
+  userId: string;
+  agencyId: string;
 }

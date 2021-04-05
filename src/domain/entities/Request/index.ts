@@ -2,8 +2,8 @@ import { Property } from "~/domain/entities/Property";
 
 export interface Request {
   id: string;
-  user?: { id: string; name: string };
-  agency?: { id: string; name: string };
+  userId?: string;
+  agencyId?: string;
   properties: Property;
   memo?: string;
 }

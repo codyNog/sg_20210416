@@ -16,14 +16,17 @@ const deleteRequest = async (id: string) =>
 
 const getRequests = async () => await db.requests.toArray();
 
+const getRequestsByUserId = async (userId: string) =>
+  await db.requests.where({ userId }).toArray();
+
 const getRequestsByAgencyId = async (agencyId: string) =>
-  await db.requests.where({ agency: { id: agencyId } }).toArray();
+  await db.requests.where({ agencyId }).toArray();
 
 const updateRequestsWhenAgencyDeleted = async (agencyId: string) => {
   const requests = await getRequestsByAgencyId(agencyId);
   await db.requests.bulkPut(
     requests.map((elem) => {
-      const { agency: _omit, ...rest } = elem;
+      const { agencyId: _omit, ...rest } = elem;
       return rest;
     })
   );
@@ -35,6 +38,7 @@ interface RequestDBUseCase {
   updateRequest: (request: DBRequestModel) => Promise<number>;
   deleteRequest: (id: string) => Promise<void>;
   getRequests: () => Promise<DBRequestModel[]>;
+  getRequestsByUserId: (userId: string) => Promise<Request[]>;
   getRequestsByAgencyId: (agencyId: string) => Promise<Request[]>;
   updateRequestsWhenAgencyDeleted: (agencyId: string) => Promise<void>;
 }
@@ -45,6 +49,7 @@ export const requestDB: RequestDBUseCase = {
   updateRequest,
   deleteRequest,
   getRequests,
+  getRequestsByUserId,
   getRequestsByAgencyId,
   updateRequestsWhenAgencyDeleted
 };

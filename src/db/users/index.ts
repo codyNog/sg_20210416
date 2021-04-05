@@ -1,26 +1,27 @@
 import { User } from "~/domain/entities/User";
 import { db } from "~/libs/db";
 
-type Model = Omit<User, "properties">;
+type Model = Omit<User, "properties" | "requests">;
 
 export interface DBUserModel extends Model {
   propertyIds: string[];
+  requestIds: string[];
 }
 
 const createUser = async (user: DBUserModel) => await db.users.put(user);
 
-const getUser = async (id: string) => await db.users.get(Number(id));
+const getUser = async (id: string) => await db.users.get(id);
 
 const updateUser = async (user: DBUserModel) => await db.users.put(user);
 
-const deleteUser = async (id: string) => await db.users.delete(Number(id));
+const deleteUser = async (id: string) => await db.users.delete(id);
 
 const getUsers = async () => await db.users.toArray();
 
 interface UserDBUseCase {
-  createUser: (user: DBUserModel) => Promise<number>;
+  createUser: (user: DBUserModel) => Promise<string>;
   getUser: (id: string) => Promise<DBUserModel>;
-  updateUser: (user: DBUserModel) => Promise<number>;
+  updateUser: (user: DBUserModel) => Promise<string>;
   deleteUser: (id: string) => Promise<void>;
   getUsers: () => Promise<DBUserModel[]>;
 }

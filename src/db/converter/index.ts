@@ -4,17 +4,29 @@ import { DBPropertyModel } from "~/db/properties";
 import { DBUserModel } from "~/db/users";
 import { Agency } from "~/domain/entities/Agency";
 import { DBAgencyModel } from "~/db/agencies";
-import { Request } from "~/domain/entities/Request";
 import { DBRequestModel } from "~/db/requests";
 
 const userToModel = (user: User): DBUserModel => {
-  const { properties, ...rest } = user;
-  return { ...rest, propertyIds: properties.map((elem) => elem.id) };
+  const { properties, requests, ...rest } = user;
+  return {
+    ...rest,
+    propertyIds: properties.map((elem) => elem.id),
+    requestIds: requests.map((elem) => elem.id)
+  };
 };
 
-const modelToUser = (user: DBUserModel, properties: Property[]): User => {
-  const { propertyIds: _omit, ...rest } = user;
-  return { ...rest, properties };
+const modelToUser = (
+  user: DBUserModel,
+  params: { propertyModels: DBPropertyModel[]; requestModels: DBRequestModel[] }
+): User => {
+  const { propertyIds: _foo, requestIds: _bar, ...rest } = user;
+  const properties = params.propertyModels.map((elem) =>
+    dbConverter.modelToProperty(elem)
+  );
+  const requests = params.requestModels.map((elem) =>
+    dbConverter.modelToRequest(elem)
+  );
+  return { ...rest, properties, requests };
 };
 
 const propertyToModel = (property: Property): DBPropertyModel => {

@@ -1,17 +1,18 @@
-import useSWR from "swr";
+import Link from "next/link";
 import { UserItem } from "~/components/molecules/UserItem";
-import { backend } from "~/domain/backend";
-import { User } from "~/domain/entities/User";
+import { GlobalStore } from "~/store/global";
 
 export const UserList: React.FC = () => {
-  const { data: users } = useSWR<User[]>("users", backend().user.fetchUsers);
+  const { users } = GlobalStore.useContainer();
 
   if (!users) return null;
 
   return (
     <>
       {users.map((user) => (
-        <UserItem key={user.id} user={user} />
+        <Link key={user.id} href={`/users/${user.id}`}>
+          <UserItem user={user} cursor={"pointer"} />
+        </Link>
       ))}
     </>
   );

@@ -13,4 +13,6 @@ export interface Agency {
   address: Address;
   properties: Property[];
   requests: Request[];
+  userId: string;
+  agencyId: string;
 }

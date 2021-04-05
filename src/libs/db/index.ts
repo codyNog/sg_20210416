@@ -7,7 +7,7 @@ import { DBUserModel } from "~/db/users";
 type DexieDatabase = { [P in keyof Dexie]: Dexie[P] };
 
 interface DB extends DexieDatabase {
-  users: Dexie.Table<DBUserModel, number>;
+  users: Dexie.Table<DBUserModel, string>;
   properties: Dexie.Table<DBPropertyModel, number>;
   agencies: Dexie.Table<DBAgencyModel, number>;
   requests: Dexie.Table<DBRequestModel, number>;
@@ -17,9 +17,9 @@ const db = new Dexie("2021.04.09") as DB;
 
 db.version(1).stores({
   users: "++id, profile",
-  properties: "++id, name, status, address, detail, owedBy, managedBy",
+  properties: "++id, name, status, address, detail, userId, agencyId",
   agencies: "++id, name, address",
-  requests: "++id, user, agency, properties, memo"
+  requests: "++id, userId, agencyId, properties, memo"
 });
 
 export { db };
