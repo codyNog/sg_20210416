@@ -2,7 +2,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import App from "next/app";
 import Head from "next/head";
 import "ress";
-import { GlobalStore, useGlobal } from "~/store/global";
+import { GlobalStore } from "~/store/global";
 
 export default class MyApp extends App {
   static async getStaticProps({ Component, ctx }) {

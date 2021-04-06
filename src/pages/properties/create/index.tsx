@@ -1,10 +1,10 @@
-import { PropertyList } from "~/components/organisms/PropertyList";
+import { PropertyForm } from "~/components/organisms/PropertyForm";
 import { Template } from "~/components/templates";
 
 const Component = () => {
   return (
     <Template>
-      <PropertyList />
+      <PropertyForm />
     </Template>
   );
 };

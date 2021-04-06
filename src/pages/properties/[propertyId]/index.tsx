@@ -1,16 +1,21 @@
 import { useRouter } from "next/dist/client/router";
 import useSWR from "swr";
-import { PropertyItem } from "~/components/molecules/PropertyItem";
+import { PropertyForm } from "~/components/organisms/PropertyForm";
+import { Template } from "~/components/templates";
 import { backend } from "~/domain/backend";
 
 const Component = () => {
   const { query } = useRouter();
   const { data: property } = useSWR(
-    [query.propertyId],
+    query.propertyId ? [query.propertyId] : null,
     backend().property.fetchProperty
   );
   if (!property) return null;
-  return <PropertyItem propertyItem={property} />;
+  return (
+    <Template>
+      <PropertyForm property={property} />
+    </Template>
+  );
 };
 
 export default Component;

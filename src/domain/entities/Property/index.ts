@@ -1,7 +1,9 @@
+import { MappedKey } from "~/libs/types";
+
 interface Status {
   value: number;
   rent?: number;
-  for: "sale" | "rent" | "other";
+  purpose: "sale" | "rent" | "other" | string;
 }
 
 interface Address {
@@ -10,7 +12,7 @@ interface Address {
   otherAddress: string;
 }
 
-type FloorPlan = "1R" | "1LDK" | "2LDK" | " 3LDK";
+type FloorPlan = "1R" | "1LDK" | "2LDK" | "3LDK" | string;
 
 interface Detail {
   area: number;
@@ -27,3 +29,5 @@ export interface Property {
   userId: string;
   agencyId: string;
 }
+
+export type KeyOfProperty = MappedKey<Property>;

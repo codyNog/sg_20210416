@@ -1,5 +1,6 @@
 import { Property } from "~/domain/entities/Property";
 import { Box, Text, Tag, BoxProps } from "@chakra-ui/react";
+import { Card } from "~/components/atoms/Card";
 
 interface Props extends BoxProps {
   propertyItem: Property;
@@ -10,7 +11,7 @@ export const PropertyItem: React.FC<Props> = ({
   ...boxProps
 }) => {
   return (
-    <Box {...boxProps}>
+    <Card {...boxProps}>
       <Text>{propertyItem.name}</Text>
       <Box>
         <Text>{propertyItem.status.value}</Text>
@@ -27,6 +28,6 @@ export const PropertyItem: React.FC<Props> = ({
           ))}
         </Box>
       </Box>
-    </Box>
+    </Card>
   );
 };
