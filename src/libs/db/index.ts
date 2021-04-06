@@ -9,7 +9,7 @@ type DexieDatabase = { [P in keyof Dexie]: Dexie[P] };
 interface DB extends DexieDatabase {
   users: Dexie.Table<DBUserModel, string>;
   properties: Dexie.Table<DBPropertyModel, number>;
-  agencies: Dexie.Table<DBAgencyModel, number>;
+  agencies: Dexie.Table<DBAgencyModel, string>;
   requests: Dexie.Table<DBRequestModel, number>;
 }
 

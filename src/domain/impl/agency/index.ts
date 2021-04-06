@@ -3,11 +3,18 @@ import { dbConverter } from "~/db/converter";
 import { propertyDB } from "~/db/properties";
 import { requestDB } from "~/db/requests";
 import { Agency } from "~/domain/entities/Agency";
+import { v4 as uuidv4 } from "uuid";
 
 const fetchAgencies = async () => {
   return (await agencyDB.getAgencies()).map((elem) =>
     dbConverter.modelToAgency(elem, { properties: [], requests: [] })
   );
+};
+
+const createAgency = async (agency: Agency) => {
+  if (!agency.id) agency.id = uuidv4();
+  await agencyDB.createAgency(dbConverter.agencyToModel(agency));
+  return agency;
 };
 
 const fetchAgency = async (id: string) => {
@@ -30,6 +37,7 @@ const deleteAgency = async (id: string) => {
 };
 
 export interface AgencyUseCase {
+  createAgency: (agency: Agency) => Promise<Agency>;
   fetchAgencies: () => Promise<Agency[]>;
   fetchAgency: (id: string) => Promise<Agency>;
   updateAgency: (agency: Agency) => Promise<Agency>;
@@ -37,6 +45,7 @@ export interface AgencyUseCase {
 }
 
 export const agencyImpl: AgencyUseCase = {
+  createAgency,
   fetchAgencies,
   fetchAgency,
   updateAgency,

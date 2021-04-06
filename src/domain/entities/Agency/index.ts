@@ -1,5 +1,6 @@
 import { Property } from "~/domain/entities/Property";
 import { Request } from "~/domain/entities/Request";
+import { MappedKey } from "~/libs/types";
 
 interface Address {
   prefecture: string;
@@ -13,6 +14,6 @@ export interface Agency {
   address: Address;
   properties: Property[];
   requests: Request[];
-  userId: string;
-  agencyId: string;
 }
+
+export type KeyOfAgency = MappedKey<Agency>;
