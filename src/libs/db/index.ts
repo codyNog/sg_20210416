@@ -16,10 +16,10 @@ interface DB extends DexieDatabase {
 const db = new Dexie("2021.04.09") as DB;
 
 db.version(1).stores({
-  users: "++id, profile",
-  properties: "++id, name, status, address, detail, userId, agencyId",
-  agencies: "++id, name, address",
-  requests: "++id, userId, agencyId, properties, memo"
+  users: "id, profile",
+  properties: "id, name, status, address, detail, userId, agencyId",
+  agencies: "id, name, address",
+  requests: "id, userId, agencyId, properties, memo"
 });
 
 export { db };

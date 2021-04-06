@@ -8,7 +8,8 @@ const Component = () => {
   const { query } = useRouter();
   const { data: user } = useSWR(
     query.userId ? [query.userId] : null,
-    backend().user.fetchUser
+    backend().user.fetchUser,
+    { revalidateOnMount: true }
   );
 
   if (!user) return null;
