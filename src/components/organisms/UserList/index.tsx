@@ -1,14 +1,9 @@
 import Link from "next/link";
-import { useEffect } from "react";
 import { UserItem } from "~/components/molecules/UserItem";
-import { GlobalStore } from "~/store/global";
+import { useUserList } from "~/store/organisms/UserList";
 
 export const UserList: React.FC = () => {
-  const { users, revalidateUsers } = GlobalStore.useContainer();
-
-  useEffect(() => {
-    revalidateUsers();
-  }, []);
+  const { users } = useUserList();
 
   if (!users) return null;
 

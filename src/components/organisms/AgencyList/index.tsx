@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { AgencyItem } from "~/components/molecules/AgencyItem";
-import { GlobalStore } from "~/store/global";
+import { useAgencyList } from "~/store/organisms/AgencyList";
 
 export const AgencyList: React.FC = () => {
-  const { agencies } = GlobalStore.useContainer();
+  const { agencies } = useAgencyList();
 
   if (!agencies) return null;
 
