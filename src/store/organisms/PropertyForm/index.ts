@@ -8,7 +8,6 @@ import { Property } from "~/domain/entities/Property";
 interface FormValue {
   name: string;
   value: number;
-  purpose: string;
   prefecture: string;
   city: string;
   otherAddress: string;
@@ -50,7 +49,6 @@ export const usePropertyForm = () => {
     const {
       name,
       value,
-      purpose,
       prefecture,
       rent,
       city,
@@ -63,7 +61,6 @@ export const usePropertyForm = () => {
       name,
       status: {
         value,
-        purpose,
         rent
       },
       address: {
