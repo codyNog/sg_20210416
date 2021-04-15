@@ -6,8 +6,8 @@ interface Props {
   agency?: Agency;
 }
 
-export const AgencyForm: React.FC<Props> = ({ agency }) => {
-  const { register, submit, onDelete } = useAgencyForm(agency);
+export const AgencyForm: React.FC<Props> = () => {
+  const { register, submit, onDelete, agency } = useAgencyForm();
 
   return (
     <Box as={"form"} onSubmit={submit}>

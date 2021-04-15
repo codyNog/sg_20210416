@@ -1,4 +1,6 @@
+import { useRouter } from "next/dist/client/router";
 import { useForm } from "react-hook-form";
+import useSWR from "swr";
 import { backend } from "~/domain/backend";
 import { Agency } from "~/domain/entities/Agency";
 
@@ -9,8 +11,14 @@ interface FormValue {
   otherAddress: string;
 }
 
-export const useAgencyForm = (agency: Agency) => {
+export const useAgencyForm = () => {
   const { register, handleSubmit } = useForm<Agency>();
+  const { query, push } = useRouter();
+  const { data: agency } = useSWR(
+    query.agencyId ? [query.agencyId] : null,
+    backend().agency.fetchAgency,
+    { revalidateOnMount: true }
+  );
 
   const isEdit = !!agency;
 
@@ -30,6 +38,7 @@ export const useAgencyForm = (agency: Agency) => {
     isEdit
       ? await backend().agency.updateAgency(nextState)
       : await backend().agency.createAgency(nextState);
+    push("/agencies");
   };
 
   const submit = handleSubmit(onSubmit);
@@ -38,7 +47,8 @@ export const useAgencyForm = (agency: Agency) => {
     if (!agency) return;
     if (confirm("この不動産業者を削除しますか？"))
       await backend().agency.deleteAgency(agency.id);
+    push("/agencies");
   };
 
-  return { register, submit, onDelete };
+  return { register, submit, onDelete, agency };
 };
