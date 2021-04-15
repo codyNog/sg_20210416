@@ -1,13 +1,8 @@
-import { Box, Input, Text } from "@chakra-ui/react";
-import { User } from "~/domain/entities/User";
+import { Box, Button, Input, Text } from "@chakra-ui/react";
 import { useUserForm } from "~/store/organisms/UserForm";
 
-interface Props {
-  user?: User;
-}
-
-export const UserForm: React.FC<Props> = ({ user }) => {
-  const { register, submit, onDelete } = useUserForm(user);
+export const UserForm: React.FC = () => {
+  const { register, submit, onDelete, user } = useUserForm();
 
   return (
     <Box as={"form"} onSubmit={submit}>
@@ -44,14 +39,15 @@ export const UserForm: React.FC<Props> = ({ user }) => {
         value={user ? "ユーザーを編集する" : "ユーザーを作成する"}
       />
       {user && (
-        <Input
+        <Button
+          width={"100%"}
           bgColor={"red"}
           color={"white"}
           mt={2}
-          type={"submit"}
-          value={"ユーザーを削除する"}
           onClick={onDelete}
-        />
+        >
+          ユーザーを削除する
+        </Button>
       )}
     </Box>
   );
