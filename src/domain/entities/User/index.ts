@@ -11,6 +11,6 @@ interface Profile {
 export interface User {
   id: string;
   profile: Profile;
-  properties: Property[];
-  requests: Request[];
+  properties: Property[]; // 所有している物件、デフォルトは空配列
+  requests: Request[]; // 業者への依頼、デフォルトは空配列
 }
