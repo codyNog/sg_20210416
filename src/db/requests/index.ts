@@ -3,16 +3,19 @@ import { db } from "~/libs/db";
 
 export type DBRequestModel = Request;
 
-const createRequest = async (request: DBRequestModel) =>
+const createRequest = async (request: DBRequestModel) => {
   await db.requests.put(request);
+  return request;
+};
 
-const getRequest = async (id: string) => await db.requests.get(Number(id));
+const getRequest = async (id: string) => await db.requests.get(id);
 
-const updateRequest = async (request: DBRequestModel) =>
+const updateRequest = async (request: DBRequestModel) => {
   await db.requests.put(request);
+  return request;
+};
 
-const deleteRequest = async (id: string) =>
-  await db.requests.delete(Number(id));
+const deleteRequest = async (id: string) => await db.requests.delete(id);
 
 const getRequests = async () => await db.requests.toArray();
 
@@ -33,9 +36,9 @@ const updateRequestsWhenAgencyDeleted = async (agencyId: string) => {
 };
 
 interface RequestDBUseCase {
-  createRequest: (request: DBRequestModel) => Promise<number>;
+  createRequest: (request: DBRequestModel) => Promise<DBRequestModel>;
   getRequest: (id: string) => Promise<DBRequestModel>;
-  updateRequest: (request: DBRequestModel) => Promise<number>;
+  updateRequest: (request: DBRequestModel) => Promise<DBRequestModel>;
   deleteRequest: (id: string) => Promise<void>;
   getRequests: () => Promise<DBRequestModel[]>;
   getRequestsByUserId: (userId: string) => Promise<Request[]>;

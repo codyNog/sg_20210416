@@ -10,7 +10,7 @@ interface DB extends DexieDatabase {
   users: Dexie.Table<DBUserModel, string>;
   properties: Dexie.Table<DBPropertyModel, string>;
   agencies: Dexie.Table<DBAgencyModel, string>;
-  requests: Dexie.Table<DBRequestModel, number>;
+  requests: Dexie.Table<DBRequestModel, string>;
 }
 
 const db = new Dexie("2021.04.09") as DB;

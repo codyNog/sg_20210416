@@ -1,27 +1,32 @@
+import { requestDB } from "~/db/requests";
 import { Request } from "~/domain/entities/Request";
-import { httpClient } from "~/libs/httpClient";
+import { v4 as uuidv4 } from "uuid";
 
-const fetchRequests = () => httpClient.requests.$get();
+const createRequest = async (request: Request) => {
+  if (!request.id) request.id = uuidv4();
+  return await requestDB.createRequest(request);
+};
 
-const fetchRequest = (requestId: string) =>
-  httpClient.requests._requestId(requestId).$get();
+const fetchRequest = (requestId: string) => requestDB.getRequest(requestId);
 
-const updateRequest = (request: Request) =>
-  httpClient.requests._requestId(request.id).$put({ body: request });
+const updateRequest = (request: Request) => requestDB.updateRequest(request);
 
-const createRequest = (request: Request) =>
-  httpClient.requests.$post({ body: request });
+const deleteRequest = (requestId: string) => requestDB.deleteRequest(requestId);
+
+const fetchRequests = () => requestDB.getRequests();
 
 export interface RequestUseCase {
-  fetchRequests: () => Promise<Request[]>;
+  createRequest: (request: Request) => Promise<Request>;
   fetchRequest: (requestId: string) => Promise<Request>;
   updateRequest: (request: Request) => Promise<Request>;
-  createRequest: (request: Request) => Promise<Request>;
+  deleteRequest: (requestId: string) => Promise<void>;
+  fetchRequests: () => Promise<Request[]>;
 }
 
 export const requestImpl: RequestUseCase = {
-  fetchRequests,
+  createRequest,
   fetchRequest,
   updateRequest,
-  createRequest
+  deleteRequest,
+  fetchRequests
 };
