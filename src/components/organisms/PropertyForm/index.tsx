@@ -1,4 +1,4 @@
-import { Box, Button, Input, Select, Tag, Text } from "@chakra-ui/react";
+import { Box, Button, Input, Select, Text, Tag } from "@chakra-ui/react";
 import { Property } from "~/domain/entities/Property";
 import { usePropertyForm } from "~/store/organisms/PropertyForm";
 
@@ -7,19 +7,10 @@ interface Props {
 }
 
 export const PropertyForm: React.FC<Props> = ({ property }) => {
-  const {
-    submit,
-    onDelete,
-    register,
-    onChangeFeature,
-    onEnterFeatures,
-    features,
-    feature
-  } = usePropertyForm(property);
+  const { submit, onDelete, register } = usePropertyForm();
 
   return (
     <Box as={"form"} onSubmit={submit}>
-      <Text>物件作成</Text>
       <Text>物件名</Text>
       <Input
         name={"name"}
@@ -33,13 +24,11 @@ export const PropertyForm: React.FC<Props> = ({ property }) => {
         defaultValue={property ? property.status.value : ""}
         ref={register}
       />
-      <Text>用途</Text>
-      <Select />
       <Text>賃料</Text>
       <Input
         name={"rent"}
         type={"number"}
-        defaultValue={property ? property.status.rent : ""}
+        defaultValue={property ? property.status.rent : 0}
         ref={register}
       />
       <Text>住所</Text>
@@ -62,6 +51,8 @@ export const PropertyForm: React.FC<Props> = ({ property }) => {
       <Text>面積</Text>
       <Input
         name={"area"}
+        type={"number"}
+        step={"0.1"}
         defaultValue={property ? property.detail.area : ""}
         ref={register}
       />
@@ -71,17 +62,6 @@ export const PropertyForm: React.FC<Props> = ({ property }) => {
         defaultValue={property ? property.detail.floorPlan : ""}
         ref={register}
       />
-      <Text>特徴</Text>
-      <Input
-        value={feature}
-        onChange={(e) => onChangeFeature(e.currentTarget.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") onEnterFeatures();
-        }}
-      />
-      {features.map((elem) => {
-        <Text>{elem}</Text>;
-      })}
       <Input
         mt={2}
         type={"submit"}

@@ -1,5 +1,7 @@
+import { useRouter } from "next/dist/client/router";
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
+import useSWR from "swr";
 import { backend } from "~/domain/backend";
 import { Property } from "~/domain/entities/Property";
 
@@ -12,9 +14,16 @@ interface FormValue {
   otherAddress: string;
   area: number;
   floorPlan: string;
+  rent: number;
 }
 
-export const usePropertyForm = (property: Property) => {
+export const usePropertyForm = () => {
+  const { query, push } = useRouter();
+  const { data: property, mutate: setProperty } = useSWR(
+    query.propertyId ? [query.propertyId] : null,
+    backend().property.fetchProperty,
+    { revalidateOnMount: true }
+  );
   const { register, handleSubmit } = useForm<Property>();
   const [feature, setFeature] = useState("");
   const [features, setFeatures] = useState<string[]>(
@@ -32,7 +41,6 @@ export const usePropertyForm = (property: Property) => {
   );
 
   const onEnterFeatures = useCallback(() => {
-    console.log(feature);
     if (!feature) return;
     setFeatures((prev) => prev.concat(feature));
     setFeature("");
@@ -44,6 +52,7 @@ export const usePropertyForm = (property: Property) => {
       value,
       purpose,
       prefecture,
+      rent,
       city,
       otherAddress,
       area,
@@ -54,7 +63,8 @@ export const usePropertyForm = (property: Property) => {
       name,
       status: {
         value,
-        purpose
+        purpose,
+        rent
       },
       address: {
         prefecture,
@@ -69,9 +79,11 @@ export const usePropertyForm = (property: Property) => {
       userId: "",
       agencyId: ""
     };
-    isEdit
+    const newProperty = isEdit
       ? await backend().property.updateProperty(nextState)
       : await backend().property.createProperty(nextState);
+    setProperty(newProperty, false);
+    push("/properties");
   };
 
   const submit = handleSubmit(onSubmit);
@@ -79,6 +91,7 @@ export const usePropertyForm = (property: Property) => {
   const onDelete = async () => {
     if (!property) return;
     await backend().property.deleteProperty(property.id);
+    push("/properties");
   };
 
   return {
