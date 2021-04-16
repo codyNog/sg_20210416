@@ -1,3 +1,4 @@
+import { Agency } from "~/domain/entities/Agency";
 import { User } from "~/domain/entities/User";
 
 const user: User = {
@@ -14,7 +15,23 @@ const user: User = {
 
 const users = [];
 
+const agency: Agency = {
+  id: "foo",
+  name: "野口不動産",
+  address: {
+    prefecture: "",
+    city: "",
+    otherAddress: ""
+  },
+  requests: [],
+  properties: []
+};
+
+const agencies = [agency];
+
 export const mocks = {
   user,
-  users
+  users,
+  agency,
+  agencies
 };
