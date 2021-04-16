@@ -45,7 +45,7 @@ export const AgencyForm: React.FC = () => {
           mt={2}
           onClick={onDelete}
         >
-          ユーザーを削除する
+          不動産業者を削除する
         </Button>
       )}
     </Box>
